@@ -43,11 +43,18 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  z-index: 0; /*base slide layer*/
+  pointer-events: none; /*dont block clicks when hidden*/
+
+  user-select: none; /*prevent selection on hidden slides*/
 }
 .mySlide[data-active] {
   /*selects only elements with both class 'slide' AND  attribute 'data-active'*/
   opacity: 1;
   transition-delay: 0ms;
+  z-index: 2; /*ensure active slide sits on top*/
+  pointer-events: auto; /*allow clicking/selecting*/
+  user-select: text; /*enable selection on active slide*/
 }
 
 .profile-picture {
@@ -63,13 +70,7 @@ h1 {
 p {
   font-size: 20px;
 }
-.sliders {
-  position: absolute;
-  bottom: 10%;
-  right: 50%;
-  z-index: 2;
-  transform: translateX(50%);
-}
+
 .button {
   cursor: pointer;
   position: absolute;
@@ -85,10 +86,19 @@ p {
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 10;
 }
 .button.next {
   right: 5%;
 }
 .button.previous {
   left: 5%;
+}
+
+.audio {
+  position: absolute;
+  bottom: 5%;
+  right: 50%;
+  transform: translateX(50%);
+  z-index: 10;
 }
